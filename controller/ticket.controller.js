@@ -1,6 +1,12 @@
 import Ticket from '../models/ticker.model.js';
 import User from '../models/user.model.js';
 import { constant } from '../utils/constant.js';
+import { randomUUID } from 'crypto';
+import createRedis from '../utils/redisClient.js';
+import { Query } from 'mongoose';
+
+const QUEUE_KEY = 'queue:notifications'
+const redisClient = createRedis()
 
 export const createTicket = async (req, res) => {
   try {
@@ -112,3 +118,13 @@ export const updateCustomerTicketByEngineerAndAdmin = async (req, res) => {
     });
   }
 };
+
+const enqueue = async(payload) => {
+  const msg = JSON.stringify({
+    id: randomUUID(),
+    timestamp: new Date().toISOString,
+    ...payload
+  })
+  let len = await redisClient.rpush(QUEUE_KEY ,msg)
+  console.log(`[producer] enqueued -> ${msg} queue len: ${len}`)
+}
