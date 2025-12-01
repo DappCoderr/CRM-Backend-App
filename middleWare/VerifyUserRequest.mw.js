@@ -1,5 +1,5 @@
 import User from '../models/user.model.js';
-import {constant} from '../utils/constant.js';
+import { constant } from '../utils/constant.js';
 
 export const verifyUserRequest = async (req, res, next) => {
   const { name, userId, email, password, userType } = req.body;
@@ -64,19 +64,19 @@ export const verifyUserRequest = async (req, res, next) => {
 };
 
 export const verifyUserStatusAndUserType = (req, res, next) => {
-  const {userType,  userStatus} = req.body
-  
-  if(!userType || !Object.values(constant.userTypes).includes(userType)){
+  const { userType, userStatus } = req.body;
+
+  if (!userType || !Object.values(constant.userTypes).includes(userType)) {
     return res.status(400).send({
-      message: "Bag request: userType is wrong!"
-    })
+      message: 'Bag request: userType is wrong!',
+    });
   }
 
-  if(!userStatus || !Object.values(constant.userStatus).includes(userStatus)){
+  if (!userStatus || !Object.values(constant.userStatus).includes(userStatus)) {
     return res.status(400).send({
-      message: "Bag request: userStatus is wrong!"
-    })
+      message: 'Bag request: userStatus is wrong!',
+    });
   }
 
-  next()
-}
+  next();
+};

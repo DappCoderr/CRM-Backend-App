@@ -70,7 +70,7 @@ JWT_SECRET=<your-secret-key>
 node index.js
 ```
 
-Server will start on: 
+Server will start on:
 
 ```
 http://localhost:7777
@@ -91,11 +91,11 @@ http://localhost:7777
 
 ## 🔐 API Endpoints Overview
 
-| Method   | Endpoint               | Description         | Access     |
-| -------- | ---------------------- | ------------------- | ---------- |
+| Method   | Endpoint                  | Description         | Access     |
+| -------- | ------------------------- | ------------------- | ---------- |
 | **POST** | `/crm/api/v1/auth/signup` | Register a new user | Public     |
 | **POST** | `/crm/api/v1/auth/signin` | Sign in a user      | Public     |
-| **GET**  | `/crm/api/v1/users/`       | Get all users       | Admin only |
+| **GET**  | `/crm/api/v1/users/`      | Get all users       | Admin only |
 | **GET**  | `/crm/api/v1/users/:id`   | Get a user by ID    | Admin only |
 | **PUT**  | `/crm/api/v1/users/:id`   | Update user details | Admin only |
 

@@ -1,28 +1,27 @@
-import Redis from "ioredis";
+import Redis from 'ioredis';
 
 // This file connects your NodeJS app to Redis.
 
 const createRedis = () => {
+  const REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379';
+  const client = new Redis(REDIS_URL, {
+    maxRetryPerRequest: null,
+    enableReadyCheck: true,
+  });
 
-    const REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379'
-    const client = new Redis(REDIS_URL, {
-        maxRetryPerRequest: null,
-        enableReadyCheck: true,
-    })
+  client.on('error', error => {
+    console.log('Redis error: ', error.message);
+  });
 
-    client.on("error", (error) => {
-        console.log("Redis error: ", error.message)
-    })
+  client.on('connect', () => {
+    console.log('[redis] connected');
+  });
 
-    client.on("connect", ()=>{
-        console.log("[redis] connected")
-    })
+  client.on('ready', () => {
+    console.log('[redis] connnected');
+  });
 
-    client.on("ready", ()=>{
-        console.log("[redis] connnected")
-    })
+  return client;
+};
 
-    return client
-}
-
-export default createRedis
+export default createRedis;

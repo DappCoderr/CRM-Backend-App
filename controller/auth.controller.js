@@ -3,9 +3,9 @@
  * userType (userStatus) - Customer (A) | Admin (P) | Engineer (P)
  */
 import bcrypt from 'bcryptjs';
-import jwt from "jsonwebtoken"
+import jwt from 'jsonwebtoken';
 import User from '../models/user.model.js';
-import {constant} from '../utils/constant.js';
+import { constant } from '../utils/constant.js';
 
 export const signUp = async (req, res) => {
   try {
@@ -69,7 +69,9 @@ export const signIn = async (req, res) => {
       return res.status(500).send({ message: 'Server configuration error.' });
     }
 
-    const token = jwt.sign({ id: user.userId, userType: user.userType }, secret, { expiresIn: 1200 });
+    const token = jwt.sign({ id: user.userId, userType: user.userType }, secret, {
+      expiresIn: 1200,
+    });
 
     return res.status(201).send({
       name: user.name,
